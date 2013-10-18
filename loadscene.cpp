@@ -294,7 +294,7 @@ void loadScene(std::string file) {
 	float horizSpace = (2.0 * planeHeight)/height;
 	
 	std::vector<float> ray;	
-
+	std::vector<float> 
 
 
 	// Ray-trace loop
@@ -309,6 +309,9 @@ void loadScene(std::string file) {
 			
 			//calculate intersections for each object
 			
+			std::vector<float> pixel;
+			float[] reset = {0.0, 0.0, 0.0};
+			pixel.assign(reset, reset+3);
 			//if intersects point on object
 			
 				//shade and store values in image output
@@ -316,7 +319,12 @@ void loadScene(std::string file) {
 				// for every light
 					// calculate shading for object point
 					// add values to pixel vector
-				// save pixel to image
+				//if depth > 0
+					//calculate shadows and reflections for that ray and surface point
+					// shade appropriately
+					// add values to pixel vector
+			//save pixel to image
+			//reset pixel
 		
 		}
 	}
