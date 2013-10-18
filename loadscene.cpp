@@ -279,7 +279,16 @@ void loadScene(std::string file) {
 
 	//more variables
 	vector<float> camDir = vSub(lookAt, lookFrom);
+	vector<float> camBasisU = 
+	vector<float> camBasisV = up;
+	vector<float> camBasisW = vScale(-1.0, camDir);
+	float planeHeight = 2.0*tan(fov/2.0);
+	float planeWidth = 
 	
+	
+	
+	//calculate image plane size
+	float 	
 
 	// Ray-trace loop
 	for (float w=0; w<width; i++) {

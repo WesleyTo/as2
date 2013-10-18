@@ -22,7 +22,7 @@ vector<float> vAdd(vector<float> a, vector<float> b) {
 	return retVec;
 }
 
-vector<float> vScale(vector<float> a, float scalar) {
+vector<float> vScale(float scalar, vector<float> a) {
 	vector<float> retVec(3);
 	float vals[] = {a.at(0)*scalar, a.at(1)*scalar, a.at(2)*scalar};
 	retVec.assign(vals, vals+3);

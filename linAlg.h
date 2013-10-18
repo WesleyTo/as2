@@ -6,7 +6,7 @@ vector<float> vSub(vector<float>, vector<float>);
 
 vector<float> vAdd(vector<float>, vector<float>);
 
-vector<float> vScale(vector<float>, float);
+vector<float> vScale(float, vector<float>);
 
 vector<float> vMult(vector<float>, vector<float>);
 
