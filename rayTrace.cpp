@@ -1,1 +1,0 @@
-void rayTrace(vector<float> camera)
