@@ -9,6 +9,13 @@ void loadScene(std::string file) {
   //store variables and set stuff at the end
   int width, height;
   std::string fname = "output.bmp";
+  
+  //Camera values
+  vector<float> lookAt(3);
+  vector<float> lookFrom(3);
+  vector<float> up(3);
+  float fov;  
+  
 
   std::ifstream inpfile(file.c_str());
   if(!inpfile.is_open()) {
@@ -59,18 +66,19 @@ void loadScene(std::string file) {
       //  speciﬁes the camera in the standard way, as in homework 2.
       else if(!splitline[0].compare("camera")) {
         // lookfrom:
-        //    atof(splitline[1].c_str())
-        //    atof(splitline[2].c_str())
-        //    atof(splitline[3].c_str())
+        	lookFrom[0] = atof(splitline[1].c_str());
+        	lookFrom[1] = atof(splitline[2].c_str());
+        	lookFrom[2] = atof(splitline[3].c_str());
         // lookat:
-        //    atof(splitline[4].c_str())
-        //    atof(splitline[5].c_str())
-        //    atof(splitline[6].c_str())
+            lookAt[0] = atof(splitline[4].c_str());
+        	lookAt[1] = atof(splitline[5].c_str());
+        	lookAt[2] = atof(splitline[6].c_str());
         // up:
-        //    atof(splitline[7].c_str())
-        //    atof(splitline[8].c_str())
-        //    atof(splitline[9].c_str())
-        // fov: atof(splitline[10].c_str());
+            up[0] = atof(splitline[7].c_str());
+        	up[1] = atof(splitline[8].c_str());
+        	up[2] = atof(splitline[9].c_str());        
+		// FOV
+        	fov = atof(splitline[10].c_str());
       }
 
       //sphere x y z radius
@@ -268,6 +276,28 @@ void loadScene(std::string file) {
 
     inpfile.close();
   }
+
+	//more variables
+	vector<float> camDir = vSub(lookAt, lookFrom);
+	
+
+	// Ray-trace loop
+	for (float w=0; w<width; i++) {
+		for (float h=0; h<height; h++) {
+			//generate ray from h, w, camera, etc...
+			
+			//calculate intersections for each object
+			
+			//shade and store values in image output
+		}
+	}
+	//save output file
+
+
+
+
+
+
 
 }
 
