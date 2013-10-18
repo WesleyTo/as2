@@ -309,10 +309,14 @@ void loadScene(std::string file) {
 			
 			//calculate intersections for each object
 			
+			//if intersects point on object
 			
-			//shade and store values in image output
-		
-		
+				//shade and store values in image output
+				// vector<float> pixel(3);
+				// for every light
+					// calculate shading for object point
+					// add values to pixel vector
+				// save pixel to image
 		
 		}
 	}
