@@ -2,6 +2,10 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <math.h>  
+#include "raygenerate.h"
+#include "rayintersect.h"
+#include "linAlg.h"
 
 
 void loadScene(std::string file) {
@@ -11,9 +15,9 @@ void loadScene(std::string file) {
   std::string fname = "output.bmp";
   
   //Camera values
-  vector<float> lookAt(3);
-  vector<float> lookFrom(3);
-  vector<float> up(3);
+  std::vector<float> lookAt(3);
+  std::vector<float> lookFrom(3);
+  std::vector<float> up(3);
   float fov;  
   
 
@@ -99,7 +103,7 @@ void loadScene(std::string file) {
       else if(!splitline[0].compare("maxverts")) {
         // Care if you want
         // Here, either declare array size
-        // Or you can just use a STL vector, in which case you can ignore this
+        // Or you can just use a STL std::vector, in which case you can ignore this
       }
       //maxvertnorms number
       //  Deﬁnes a maximum number of vertices with normals for later speciﬁcations.
@@ -160,7 +164,7 @@ void loadScene(std::string file) {
       }
 
       //translate x y z
-      //  A translation 3-vector
+      //  A translation 3-std::vector
       else if(!splitline[0].compare("translate")) {
         // x: atof(splitline[1].c_str())
         // y: atof(splitline[2].c_str())
@@ -277,27 +281,39 @@ void loadScene(std::string file) {
     inpfile.close();
   }
 
+
 	//more variables
-	vector<float> camDir = vSub(lookAt, lookFrom);
-	vector<float> camBasisU = 
-	vector<float> camBasisV = up;
-	vector<float> camBasisW = vScale(-1.0, camDir);
-	float planeHeight = 2.0*tan(fov/2.0);
-	float planeWidth = 
+	std::vector<float> camDir = vSub(lookAt, lookFrom);
+	std::vector<float> camBasisW = vScale(-1.0, camDir);
+	std::vector<float> camBasisU = vCross(camBasisW, up);
+	std::vector<float> camBasisV = vCross(camBasisU, camBasisW);
+	float distance = 1.0;
+	float planeHeight = tan(fov/2.0);
+	float planeWidth = 0.0;
+	float vertSpace = (2.0 * planeWidth)/width;
+	float horizSpace = (2.0 * planeHeight)/height;
 	
-	
-	
-	//calculate image plane size
-	float 	
+	std::vector<float> ray;	
+
+
 
 	// Ray-trace loop
-	for (float w=0; w<width; i++) {
+	for (float w=0; w<width; w++) {
 		for (float h=0; h<height; h++) {
+			// pixel positions
+			float u = (-1.0 * planeWidth) + horizSpace * (w+0.5);
+			float v = (-1.0 * planeHeight) + vertSpace * (h+0.5);
+			
 			//generate ray from h, w, camera, etc...
+			ray = generate(distance, u, v, camBasisU, camBasisV, camBasisW);
 			
 			//calculate intersections for each object
 			
+			
 			//shade and store values in image output
+		
+		
+		
 		}
 	}
 	//save output file

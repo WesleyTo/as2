@@ -1,19 +1,19 @@
 #include <vector>
 
-float vDot(vector<float>, vector<float>);
+float* vDot(std::vector<float*>, std::vector<float*>);
 
-vector<float> vSub(vector<float>, vector<float>);
+std::vector<float*> vSub(std::vector<float*>, std::vector<float*>);
 
-vector<float> vAdd(vector<float>, vector<float>);
+std::vector<float*> vAdd(std::vector<float*>, std::vector<float*>);
 
-vector<float> vScale(float, vector<float>);
+std::vector<float*> vScale(float*, std::vector<float*>);
 
-vector<float> vMult(vector<float>, vector<float>);
+std::vector<float*> vMult(std::vector<float*>, std::vector<float*>);
 
-vector<float> vCross(vector<float>, vector<float>) ;
+std::vector<float*> vCross(std::vector<float*>, std::vector<float*>) ;
 
-void vPrint(vector<float>);
+void vPrint(std::vector<float*>);
 
-float magnitude(vector<float>);
+float* magnitude(std::vector<float*>);
 
-vector<float> normalize(vector<float>);
+std::vector<float*> normalize(std::vector<float*>);

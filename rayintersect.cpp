@@ -1,19 +1,19 @@
-#include <vector>
-#include <linAlg.h>
+#include <std::vector>
+#include "linAlg.h"
 
-void intersect(vector<float> camPos vector<float> camDir, vector<float> a, vector<float> b, vector<float> c) {
+void intersect(std::vector<float> camPos std::vector<float> camDir, std::vector<float> a, std::vector<float> b, std::vector<float> c) {
 
 }
 
 
-void intersect(vector<float> camPos vector<float> camDir, vector<float> a, vector<float> b, vector<float> c, vector<float> d) {
+void intersect(std::vector<float> camPos std::vector<float> camDir, std::vector<float> a, std::vector<float> b, std::vector<float> c, std::vector<float> d) {
 	
 	
 	
 }
 
 
-void intersect_sphere(vector<float> camPos vector<float> camDir, vector<float> a) {
+void intersect_sphere(std::vector<float> camPos std::vector<float> camDir, std::vector<float> a) {
 	
 	
 	
