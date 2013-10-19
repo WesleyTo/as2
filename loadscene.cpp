@@ -283,7 +283,6 @@ void loadScene(std::string file) {
     inpfile.close();
   }
 
-
 	//more variables
 	std::vector<float> camDir = vSub(lookAt, lookFrom);
 	std::vector<float> camBasisW = vScale(-1.0, camDir);

@@ -3,17 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-
-using namespace std;
-
-int main () {
-  ofstream myfile;
-  myfile.open ("example.txt");
-  myfile << "Writing this to a file.\n";
-  myfile.close();
-  return 0;
-}
-
 class PPM {
 		PPM(int h, int w, int m=255){
 			height = h;
