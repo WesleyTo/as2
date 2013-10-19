@@ -300,6 +300,7 @@ void loadScene(std::string file) {
 	std::vector<float> 
 	intersect itsct = new intersect();
 	std::vector<float> intersection(3);
+	PPM::PPM output = new PPM(height, width);
 
 
 	// Ray-trace loop
@@ -315,10 +316,7 @@ void loadScene(std::string file) {
 			ray.initCamDir();
 			
 			//calculate intersections for each object
-			
-			std::vector<float> pixel;
-			float[] reset = {0.0, 0.0, 0.0};
-			pixel.assign(reset, reset+3);
+			pixel p = new pixel(0, 0, 0);
 			for (int i = 0; i < numSpheres; i++) {
 				// assume numSpheres is an int >= 0
 				// assume spheres is an array of Sphere objects
@@ -329,11 +327,7 @@ void loadScene(std::string file) {
 					intersection = ray.project(min(itsct.t1, itsct.t2));
 				}
 				
-				
-				
-				
 				//shade and store values in image output
-				// vector<float> pixel(3);
 				// for every light
 					// calculate shading for object point
 					// add values to pixel vector
@@ -341,18 +335,15 @@ void loadScene(std::string file) {
 					//calculate shadows and reflections for that ray and surface point
 					// shade appropriately
 					// add values to pixel vector
+					p.add(/*returned shade values*/);
 			//save pixel to image
+			output.addPixel(p.copy());
 			//reset pixel
-		
+			p.reset();
 		}
 	}
 	//save output file
-
-
-
-
-
-
-
+	output.save(file);
+	
 }
 

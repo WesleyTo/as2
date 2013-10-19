@@ -1,26 +1,6 @@
 #include <sstream>
 class PPM
 
-typedef struct{
-	int r;
-	int g;
-	int b;
-	pixel() {
-		r = 0;
-		g = 0;
-		b = 0;
-	}
-	pixel(int x, int y, int z) {
-		r = x;
-		g = y;
-		b = z;
-	}
-	toStr() {
-		std::stringstream s;
-		s<<r<<" "<<g<<" "<<b;
-		return s.str();
-	}
-} pixel;
 
 class PPM {
 	public:
