@@ -1,18 +1,21 @@
 #include <sstream>
-class PPM
+#include "Pixel.h"
 
 
 class PPM {
 	public:
-		PPM(int height, int width, maxVal=255);
-		void addPixel(pixel p);
-		void save(string name);
-		pixel getPixel(int x, int y);
+		PPM(int, int, int);
+		void addPixel(Pixel);
+		void save(std::string);
+		Pixel getPixel(int x, int y);
+		int getWPos();
+		int getHPos();
+		int getPxCount();
+		Pixel* pixels;
 	private:
-		string header;
+		std::string header;
 		int height;
 		int width;
 		int wPos;
 		int hPos;
-		pixel pixels[][];
-}
+};

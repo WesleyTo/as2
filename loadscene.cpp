@@ -3,11 +3,11 @@
 #include <vector>
 #include <iostream>
 #include <math.h>  
-#include "raygenerate.h"
-#include "rayintersect.h"
 #include "linAlg.h"
 #include "Ray.h"
 #include "Shape.h"
+#include "PPM.h"
+#include "Pixel.h'
 
 
 void loadScene(std::string file) {

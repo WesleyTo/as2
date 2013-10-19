@@ -1,5 +1,6 @@
 #include <sstream>
 #include <algorithm>
+#include <iostream>
 
 class Pixel {
 	Pixel() {
@@ -14,7 +15,7 @@ class Pixel {
 		b = z;
 	}
 
-	string toStr() {
+	std::string toStr() {
 		std::stringstream s;
 		s<<r<<" "<<g<<" "<<b;
 		return s.str();
@@ -34,7 +35,7 @@ class Pixel {
 		b = 0;
 	}
 	
-	void add(pixel p) {
+	void add(Pixel p) {
 		self.setR(r+p.getR());
 		self.setG(g+p.getG());
 		self.setB(b+p.getB());
@@ -64,4 +65,18 @@ class Pixel {
 		b = min(blue, 255);
 	}
 	
+	void print() {
+		std::cout<<"["<<r<<", "<<g<<", "<<b<<"]\n";
+	}
+	
+}
+
+int main() {
+	Pixel::Pixel p = new Pixel(255, 255, 255);
+	Pixel::Pixel black = new Pixel(0,0,0);
+	p.print();
+	black.print();
+	black.add(print);
+	black.print();
+
 }
