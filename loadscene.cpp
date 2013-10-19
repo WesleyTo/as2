@@ -6,6 +6,8 @@
 #include "raygenerate.h"
 #include "rayintersect.h"
 #include "linAlg.h"
+#include "Ray.h"
+#include "Shape.h"
 
 
 void loadScene(std::string file) {
@@ -293,8 +295,11 @@ void loadScene(std::string file) {
 	float vertSpace = (2.0 * planeWidth)/width;
 	float horizSpace = (2.0 * planeHeight)/height;
 	
-	std::vector<float> ray;	
+	Ray::Ray ray = new Ray();
+	Shape::Sphere sphere = new Sphere();
 	std::vector<float> 
+	intersect itsct = new intersect();
+	std::vector<float> intersection(3);
 
 
 	// Ray-trace loop
@@ -305,15 +310,28 @@ void loadScene(std::string file) {
 			float v = (-1.0 * planeHeight) + vertSpace * (h+0.5);
 			
 			//generate ray from h, w, camera, etc...
-			ray = generate(distance, u, v, camBasisU, camBasisV, camBasisW);
+			ray.setEye(lookFrom);
+			ray.setPoint(lookAt);
+			ray.initCamDir();
 			
 			//calculate intersections for each object
 			
 			std::vector<float> pixel;
 			float[] reset = {0.0, 0.0, 0.0};
 			pixel.assign(reset, reset+3);
-			//if intersects point on object
-			
+			for (int i = 0; i < numSpheres; i++) {
+				// assume numSpheres is an int >= 0
+				// assume spheres is an array of Sphere objects
+				sphere.setRadius(spheres[i].getRadius());
+				sphere.setPosition(spheres[i].getPos());
+				itsct = sphere.intersect(ray);
+				if (itsct.hit) {
+					intersection = ray.project(min(itsct.t1, itsct.t2));
+				}
+				
+				
+				
+				
 				//shade and store values in image output
 				// vector<float> pixel(3);
 				// for every light

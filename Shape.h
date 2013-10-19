@@ -55,9 +55,8 @@ typedef struct
 class Sphere {
 	public:
 		Sphere(float r, std::vector<float> p);
-		boundingBox getBounds();
 		float getRadius();
-		std::vector<float> getPosition();
+		std::vector<float> getPos();
 		void setRadius(float r);
 		void setPos(std::vector<float>);
 		intersect intersect(Ray);

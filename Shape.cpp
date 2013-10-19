@@ -3,6 +3,11 @@
 
 class Sphere {
 
+	Sphere() {
+		radius = 0.0;
+		position = NULL;
+	}
+
 	Sphere(float r, std::vector<float> p) {
 		radius = r;
 		position = p;
@@ -12,7 +17,7 @@ class Sphere {
 		return radius;
 	}
 	
-	std::vector<float> getPosition() {
+	std::vector<float> getPos() {
 		return position;
 	}
 	
@@ -38,6 +43,7 @@ class Sphere {
 			ret.hit = true;
 			ret.tangent = true;
 			ret.t1 = (vDot(vScale(-1, *d), vSub(e,position))+discriminant)/vDot(*d, *d);
+			ret.t2 = ret.t1;
 		}		
 		return ret;
 	}
