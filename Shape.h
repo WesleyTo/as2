@@ -48,9 +48,7 @@ typedef struct
 typedef struct 
 {
 	bool hit = false;
-	bool tangent = false;
-	std::vector<float> t1 = NULL;
-	std::vector<float> t2 = NULL;
+	std::vector<float> point = NULL;
 } intersect;
 
 

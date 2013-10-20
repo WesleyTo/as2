@@ -1,35 +1,35 @@
 #include <vector>
 #include "Shape.h"
 
-class Sphere {
 
-	Sphere() {
+
+	Shpere::Sphere() {
 		radius = 0.0;
 		position = NULL;
 	}
 
-	Sphere(float r, std::vector<float> p) {
+	Shpere::Sphere(float r, std::vector<float> p) {
 		radius = r;
 		position = p;
 	}
 	
-	float getRadius() {
+	float Shpere::getRadius() const{
 		return radius;
 	}
 	
-	std::vector<float> getPos() {
+	std::vector<float> Shpere::getPos() const{
 		return position;
 	}
 	
-	void resize(float r) {
+	void Shpere::resize(float r) {
 		radius = r;
 	}
 		
-	void setPos(std::vector<float> ;) {
+	void Shpere::setPos(std::vector<float> ;) {
 		position = p;
 	}
 	
-	intersect intersect(Ray r) {
+	intersect Shpere::intersect(Ray r) {
 		intersect ret = new intersect();
 		std::vector<float>* d = &r.getDir();
 		std::vector<float>* e = &r.getEye();
@@ -47,22 +47,21 @@ class Sphere {
 		}		
 		return ret;
 	}
-}
 
-class Polygon {
 
-	Polygon(int s) {
+
+	Polygon::Polygon(int s) {
 		size = s;
 		vertices = new vertex[s];
 		bounds = new boundingBox();
 		vertexCount = 0;
 	}
 	
-	boundingBox getBounds() {
+	boundingBox Polygon::getBounds() const{
 		return bounds;
 	}
 	
-	void addVertex(vertex v) {
+	void Polygon::addVertex(vertex v) {
 		vertices[vertexCount] = v;
 		vertexCount++;
 		setBounds(v);
@@ -129,15 +128,9 @@ class Polygon {
 		std::vector<float>* d = &r.getDir();
 		std::vector<float>* e = &r.getEye();
 		float discriminant = sqrt(pow(vDot(*d, (vSub(*e, position))), 2) - vDot(*d, *d)*(vDot(vSub(*e, position)), vSub(*e, position)) - pow(radius, 2));
-		if (discriminant > 0) {
+		if (discriminant >= 0) {
 			ret.hit = true;
-			ret.t1 = (vDot(vScale(-1, *d), vSub(*e,position))+discriminant)/vDot(*d, *d);
-			ret.t2 = (vDot(vScale(-1, *d), vSub(*e,position))-discriminant)/vDot(*d, *d);
-		}
-		else if (discriminant == 0) {
-			ret.hit = true;
-			ret.tangent = true;
-			ret.t1 = (vDot(vScale(-1, *d), vSub(e,position))+discriminant)/vDot(*d, *d);
+			ret.point = (vDot(vScale(-1, *d), vSub(*e,position))-discriminant)/vDot(*d, *d);
 		}		
 		return ret;
 	}

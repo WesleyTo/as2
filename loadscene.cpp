@@ -315,7 +315,7 @@ void loadScene(std::string file) {
 			ray.initCamDir();
 			
 			//calculate intersections for each object
-			pixel p = new pixel(0, 0, 0);
+			pixel *p = new pixel(0, 0, 0);
 			for (int i = 0; i < numSpheres; i++) {
 				// assume numSpheres is an int >= 0
 				// assume spheres is an array of Sphere objects
@@ -334,11 +334,11 @@ void loadScene(std::string file) {
 					//calculate shadows and reflections for that ray and surface point
 					// shade appropriately
 					// add values to pixel vector
-					p.add(/*returned shade values*/);
+					(*p).add(/*returned shade values*/);
 			//save pixel to image
-			output.addPixel(p.copy());
+			output.addPixel((*p).copy());
 			//reset pixel
-			p.reset();
+			(*p).reset();
 		}
 	}
 	//save output file
