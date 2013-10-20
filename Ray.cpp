@@ -1,5 +1,5 @@
 #include <vector>
-#include "ray.h"
+#include "Ray.h"
 #include "linAlg.h"
 
 Ray::Ray() {}
@@ -10,31 +10,31 @@ Ray::Ray(std::vector<float> e, std::vector<float> p) {
 	camDir = vSub(p, e);
 }
 
-void setEye(std::vector<float> e){
+void Ray::setEye(std::vector<float> e){
 	eye = e;
 }
 
-void setPoint(std::vector<float> p) {
+void Ray::setPoint(std::vector<float> p) {
 	point = p;
 }
 
-void initCamDir() {
+void Ray::initCamDir() {
 	camDir = vSub(p, e);
 }
 
-std::vector<float> getEye() {
+std::vector<float> Ray::getEye() const {
 	return eye;
 }
 
-std::vector<float>getPoint() {
+std::vector<float> Ray::getPoint() const {
 	return point;
 }
 
-std::vector<float> getDir() {
+std::vector<float> Ray::getDir() const{
 	return camDir;
 }
 
-std::vector<float> project(float t) {
+std::vector<float> Ray::project(float t) {
 	return vAdd(e, scale(t, camDir));
 
 }

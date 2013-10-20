@@ -8,9 +8,9 @@ class PPM {
 		void addPixel(Pixel);
 		void save(std::string);
 		Pixel getPixel(int x, int y);
-		int getWPos();
-		int getHPos();
-		int getPxCount();
+		int getW() const;
+		int getH() const;
+		int getPxCount() const;
 		Pixel* pixels;
 	private:
 		std::string header;
@@ -18,4 +18,6 @@ class PPM {
 		int width;
 		int wPos;
 		int hPos;
+		int maxVal;
+		int pixelCount;
 };
