@@ -1,3 +1,7 @@
+#ifndef PIXEL_H
+#define PIXEL_H
+
+
 class Pixel {
 	public:
 		Pixel();
@@ -12,9 +16,12 @@ class Pixel {
 		void setR(int);
 		void setG(int);
 		void setB(int);
+		void print();
 	
 	private:
 		int r;
 		int g;
 		int b;
 };
+
+#endif

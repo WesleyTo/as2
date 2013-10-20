@@ -23,11 +23,11 @@ std::string Pixel::toStr() {
 }
 
 Pixel Pixel::copy() {
-	pixel p = new pixel();
-	p.setR(r);
-	p.setG(g);
-	p.setB(b);
-	return p;
+	Pixel *p = new Pixel();
+	(*p).setR(r);
+	(*p).setG(g);
+	(*p).setB(b);
+	return *p;
 }
 
 void Pixel::reset() {
@@ -37,9 +37,9 @@ void Pixel::reset() {
 }
 
 void Pixel::add(Pixel p) {
-	self.setR(r+p.getR());
-	self.setG(g+p.getG());
-	self.setB(b+p.getB());
+	(*this).setR(r+p.getR());
+	(*this).setG(g+p.getG());
+	(*this).setB(b+p.getB());
 }
 
 int Pixel::getR() {
@@ -55,27 +55,27 @@ int Pixel::getB() {
 }
 
 void Pixel::setR(int red) {
-	r = min(red, 255);
+	r = std::min(red, 255);
 }
 
 void Pixel::setG(int green) {
-	g = min(green, 255);
+	g = std::min(green, 255);
 }
 
 void Pixel::setB(int blue) {
-	b = min(blue, 255);
+	b = std::min(blue, 255);
 }
 
 void Pixel::print() {
-	std::cout<<"["<<r<<", "<<g<<", "<<b<<"]\n";
+	std::cout<<"pix ["<<r<<", "<<g<<", "<<b<<"]\n";
 }
 
 int main() {
-	Pixel::Pixel p = new Pixel::Pixel(255, 255, 255);
-	Pixel::Pixel black = new Pixel::Pixel(0,0,0);
-	p.print();
-	black.print();
-	black.add(p);
-	black.print();
+	Pixel::Pixel *p = new Pixel::Pixel(255, 255, 255);
+	Pixel::Pixel *black = new Pixel::Pixel(0,0,0);
+	(*p).print();
+	(*black).print();
+	(*black).add((*p));
+	(*black).print();
 
 }

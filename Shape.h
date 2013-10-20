@@ -1,3 +1,5 @@
+#ifndef SHAPE_H
+#define SHAPE_H
 #include <vector>
 #include "Ray.h"
 
@@ -82,4 +84,5 @@ class Polygon {
 		vertex vertices[];
 		int vertexCount;
 }
-	
+
+#endif	

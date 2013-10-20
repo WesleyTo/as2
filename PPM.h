@@ -1,6 +1,7 @@
+#ifndef PPM_H
+#define PPM_H
 #include <sstream>
 #include "Pixel.h"
-
 
 class PPM {
 	public:
@@ -21,3 +22,5 @@ class PPM {
 		int maxVal;
 		int pixelCount;
 };
+
+#endif

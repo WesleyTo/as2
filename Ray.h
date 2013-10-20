@@ -1,3 +1,6 @@
+#ifndef RAY_H
+#define RAY_H
+
 #include <vector>
 
 class Ray;
@@ -20,3 +23,5 @@ class Ray {
 		std::vector<float> point;
 		std::vector<float> camDir;
 }
+
+#endif

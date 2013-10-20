@@ -49,7 +49,7 @@ std::vector<float> vCross(std::vector<float> a, std::vector<float> b) {
 }
 
 void vPrint(std::vector<float> a) {
-	std::cout<<"~["<<a.at(0)<<", "<<a.at(1)<<", "<<a.at(2)<<"]\n";
+	std::cout<<"vec ["<<a.at(0)<<", "<<a.at(1)<<", "<<a.at(2)<<"]\n";
 }
 
 float magnitude(std::vector<float> a) {

@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include "Pixel.h"
+
 
 PPM::PPM(int h, int w, int m){
 	height = h;

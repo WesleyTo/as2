@@ -1,3 +1,6 @@
+#ifndef LINALG_H
+#define LINALG_H
+
 #include <vector>
 
 float* vDot(std::vector<float*>, std::vector<float*>);
@@ -17,3 +20,5 @@ void vPrint(std::vector<float*>);
 float* magnitude(std::vector<float*>);
 
 std::vector<float*> normalize(std::vector<float*>);
+
+#endif
