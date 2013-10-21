@@ -8,6 +8,7 @@
 #include "Shape.h"
 #include "PPM.h"
 #include "Pixel.h'
+#include <list>
 
 
 void loadScene(std::string file) {
@@ -20,7 +21,13 @@ void loadScene(std::string file) {
   std::vector<float> lookAt(3);
   std::vector<float> lookFrom(3);
   std::vector<float> up(3);
-  float fov;  
+  float fov;
+  
+  // store values for shape objects
+  // initialize in loop below
+  std::vector<Sphere::Sphere> spheres;
+  std::vector<Shape::vertex> vertices;
+  std::vector<Triangle::Triangle> tris;
   
 
   std::ifstream inpfile(file.c_str());
@@ -90,11 +97,12 @@ void loadScene(std::string file) {
       //sphere x y z radius
       //  Deﬁnes a sphere with a given position and radius.
       else if(!splitline[0].compare("sphere")) {
-        // x: atof(splitline[1].c_str())
-        // y: atof(splitline[1].c_str())
-        // z: atof(splitline[1].c_str())
-        // r: atof(splitline[4].c_str())
+			x: atof(splitline[1].c_str())
+			y: atof(splitline[1].c_str())
+			z: atof(splitline[1].c_str())
+			r: atof(splitline[4].c_str())
         // Create new sphere:
+			spheres.push_back(Sphere::Sphere(r, x, y, z));
         //   Store 4 numbers
         //   Store current property values
         //   Store current top of matrix stack
@@ -117,10 +125,11 @@ void loadScene(std::string file) {
       //  Deﬁnes a vertex at the given location.
       //  The vertex is put into a pile, starting to be numbered at 0.
       else if(!splitline[0].compare("vertex")) {
-        // x: atof(splitline[1].c_str()),
-        // y: atof(splitline[2].c_str()),
-        // z: atof(splitline[3].c_str()));
+			x = atof(splitline[1].c_str()),
+			y = atof(splitline[2].c_str()),
+			z = atof(splitline[3].c_str()));
         // Create a new vertex with these 3 values, store in some array
+			vertices.emplace_back(x, y, z);
       }
       //vertexnormal x y z nx ny nz
       //  Similar to the above, but deﬁne a surface normal with each vertex.
@@ -140,10 +149,11 @@ void loadScene(std::string file) {
       //  the vertex command). The vertices are assumed to be speciﬁed in counter-clockwise order. Your code
       //  should internally compute a face normal for this triangle.
       else if(!splitline[0].compare("tri")) {
-        // v1: atof(splitline[1].c_str())
-        // v2: atof(splitline[2].c_str())
-        // v3: atof(splitline[3].c_str())
+			v1 = vertices.at(atoi(splitline[1].c_str());
+			v2 = vertices.at(atoi(splitline[2].c_str()));
+			v3 = vertices.at(atoi(splitline[3].c_str()));
         // Create new triangle:
+			tris.emplace_back(v1, v2, v3);
         //   Store pointer to array of vertices
         //   Store 3 integers to index into array
         //   Store current property values
@@ -295,8 +305,6 @@ void loadScene(std::string file) {
 	float horizSpace = (2.0 * planeHeight)/height;
 	
 	Ray::Ray ray = new Ray();
-	Shape::Sphere sphere = new Sphere();
-	std::vector<float> 
 	intersect itsct = new intersect();
 	std::vector<float> intersection(3);
 	PPM::PPM output = new PPM(height, width);
@@ -316,25 +324,25 @@ void loadScene(std::string file) {
 			
 			//calculate intersections for each object
 			pixel *p = new pixel(0, 0, 0);
-			for (int i = 0; i < numSpheres; i++) {
+			
+			
+			//for (int i = 0; i < numSpheres; i++) {
+			for(std::vector<Sphere::Sphere>::iterator sphereIt = spheres.begin(); sphereIt != myvector.end(); ++it) {
 				// assume numSpheres is an int >= 0
 				// assume spheres is an array of Sphere objects
-				sphere.setRadius(spheres[i].getRadius());
-				sphere.setPosition(spheres[i].getPos());
-				itsct = sphere.intersect(ray);
+				itsct = spheres.at(sphereIt).intersect(ray);
 				if (itsct.hit) {
-					intersection = ray.project(min(itsct.t1, itsct.t2));
+					intersection = ray.project(itsct.point);				
+					//shade and store values in image output
+					// for every light
+						// calculate shading for object point
+						// add values to pixel vector
+					//if depth > 0
+						//calculate shadows and reflections for that ray and surface point
+						// shade appropriately
+						// add values to pixel vector
+						(*p).add(/*returned shade values*/);
 				}
-				
-				//shade and store values in image output
-				// for every light
-					// calculate shading for object point
-					// add values to pixel vector
-				//if depth > 0
-					//calculate shadows and reflections for that ray and surface point
-					// shade appropriately
-					// add values to pixel vector
-					(*p).add(/*returned shade values*/);
 			//save pixel to image
 			output.addPixel((*p).copy());
 			//reset pixel

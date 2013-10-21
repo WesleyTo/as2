@@ -1,5 +1,4 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#include "Triangle.h"
 #include "Shape.h"
 
 class Triangle {
@@ -16,5 +15,3 @@ class Triangle {
 		std::vector<float> normal;
 		Shape::boundingBox bounds;
 }
-
-#endif

@@ -1,6 +1,19 @@
+#include "Sphere.h"
+#include "Shape.h"
+#include "Ray.h"
+#include <vector>
+
 Sphere::Sphere() {
 	radius = 0.0;
 	position = NULL;
+}
+
+Sphere::Sphere(float r, float x, float y, float z) {
+	radius = r;
+	p = std::vector<float>(3);
+	p[0] = x;
+	p[1] = y;
+	p[2] = z;
 }
 
 Sphere::Sphere(float r, std::vector<float> p) {
@@ -24,8 +37,12 @@ void Sphere::setPos(std::vector<float> ;) {
 	position = p;
 }
 
+std::vector<float> pointNormal(std::vector<float> point) {
+	return vSub(point, p);
+}
+
 intersect Sphere::intersect(Ray r) {
-	intersect ret = new intersect();
+	Shape::intersect ret = new Shape::intersect();
 	std::vector<float>* d = &r.getDir();
 	std::vector<float>* e = &r.getEye();
 	float discriminant = sqrt(pow(vDot(*d, (vSub(*e, position))), 2) - vDot(*d, *d)*(vDot(vSub(*e, position)), vSub(*e, position)) - pow(radius, 2));
