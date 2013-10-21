@@ -1,22 +1,20 @@
 #include "Triangle.h"
 #include "Ray.h"
+#include "Intersect.h"
+#include <iostream>
+#include "Vertex.h"
 
-Triangle(Vertex::Vertex va, Vertex::Vertex vb, Vertex::Vertex vc) {
+Triangle::Triangle(Vertex::Vertex va, Vertex::Vertex vb, Vertex::Vertex vc) {
 	v1 = va;
 	v2 = vb;
 	v3 = vc;
-	/*
-	bounds = new boundingBox::boundingBox();
-	bounds.setMinX(std::min(v1.getX(), v2.getX(), v3.getX());
-	bounds.setMaxX(std::max(v1.getX(), v2.getX(), v3.getX());
-	bounds.setMinY(std::min(v1.getY(), v2.getY(), v3.getY());
-	bounds.setMaxY(std::max(v1.getY(), v2.getY(), v3.getY());
-	bounds.setMinZ(std::min(v1.getZ(), v2.getZ(), v3.getZ());
-	bounds.setMaxZ(std::max(v1.getZ(), v2.getZ(), v3.getZ());
-	*/
+	std::vector<float> normal(3);
+	normal[0] = (v1.getY()*v2.getZ() - v1.getZ()*v2.getY());
+	normal[1] = (v1.getX()*v2.getZ() - v1.getZ()*v2.getX());
+	normal[2] = (v1.getX()*v2.getY() - v1.getY()*v2.getX());
 }
 
-Vertex::Vertex Triangle::getVertex(int n) const{
+Vertex Triangle::getVertex(int n) const{
 	if (n == 0) {
 		return v1;
 	}
@@ -28,18 +26,12 @@ Vertex::Vertex Triangle::getVertex(int n) const{
 	}
 }
 
-/*
-boundingBox::boundingBox getBounds() const {
-	return bounds;
-}
-*/
-
-std::vector<float> getNormal() const {
+std::vector<float> Triangle::getNormal() const {
 	return normal;
 }
 		
-Intersect::intersect intersect(Ray r) {
-	Intersect::Intersect ret = new Intersect::Intersect();
+Intersect Triangle::intersect(Ray r) {
+	Intersect::Intersect ret = *new Intersect::Intersect();
 	float a = v1.getX() - v2.getX();
 	float b = v1.getY() - v2.getY();
 	float c = v1.getZ() - v2.getZ();
@@ -65,8 +57,39 @@ Intersect::intersect intersect(Ray r) {
 	if (gamma < 0 || beta+gamma > 1) {return ret;}
 	float t = (-1)*(f*(akminusjb) + e*(jcminusal) + d*(blminuskc))/m;
 	std::vector<float> p;
-	p = vAdd(vAdd(v1, vScale(beta, vSub(v2, v1))), vScale(gamme, vSub(v3, v1)));
+	
+	std::vector<float> vec1 = v1.toVec();
+	std::vector<float> vec2 = v2.toVec();
+	std::vector<float> vec3 = v3.toVec();
+	std::vector<float> sub1 = vSub(&vec2, &vec1);
+	std::vector<float> sub2 = vSub(&vec3, &vec1);
+	std::vector<float> scaled1 = vScale(&beta, &sub1);
+	std::vector<float> scaled2 = vScale(&gamma, &sub2);
+	std::vector<float> added1 = vAdd(&vec1, &scaled1);
+	p = vAdd(&added1, &scaled2);
+	
 	ret.setPoint(p);
 	
 	return ret;
+}
+
+
+int main() {
+	Vertex::Vertex a = *new Vertex::Vertex(0,0,0);
+	Vertex::Vertex b = *new Vertex::Vertex(1,0,0);
+	Vertex::Vertex c = *new Vertex::Vertex(0,1,0);
+	Triangle::Triangle t = *new Triangle::Triangle(a, b, c);
+	std::vector<float> p(3);
+	p[0] = 0;
+	p[1] = 0;
+	p[2] = 0;
+	std::vector<float> e(3);
+	e[0] = 0;
+	e[1] = 0;
+	e[2] = 3;
+	Ray::Ray r = *new Ray::Ray(e, p);
+	if (t.intersect(r).isHit()) {
+		std::cout<<"OKAY\n";	
+	}
+	return 0;
 }

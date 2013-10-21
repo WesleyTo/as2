@@ -51,9 +51,4 @@ int main() {
 	p[2] = -1;
 	Ray::Ray r = Ray::Ray(e, p);
 	r.project(1.5);
-
-
-
-
-
 }

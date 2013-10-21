@@ -33,6 +33,14 @@
 		a[2] = z-v.getZ();
 		return a;
 	}
+	
+	std::vector<float> Vertex::toVec() {
+		std::vector<float> n(3);
+		n[0] = x;
+		n[1] = y;
+		n[2] = z;
+		return n;
+	}
 
 }
 

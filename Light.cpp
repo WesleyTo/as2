@@ -1,6 +1,5 @@
-#include <vector>
-#include <iostream>
 #include "Light.h"
+#include <iostream>
 
 Light::Light(float x1, float y1, float z1, float r1, float g1, float b1)
 {
@@ -33,3 +32,16 @@ float Light::getG(){
 float Light::getB(){
   return b;
 }
+
+void Light::print() {
+	std::cout<<"lgt [" << x << ", " << y << ", " << z << ", " << r << ", " << g << ", " << b <<"]\n";
+
+}
+
+//Working
+/*
+int main() {
+	Light::Light n = *new Light::Light(1, 1, 0, 0.5, 0.5, 0.5);
+	n.print();
+}
+*/

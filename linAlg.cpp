@@ -67,7 +67,8 @@ std::vector<float> normalize(std::vector<float> a) {
 }
 
 
-
+//Working
+/*
 int main(int argc, char* argv[]) {
 	std::vector<float> test1(3);
 	test1[0] = 1;
@@ -86,3 +87,4 @@ int main(int argc, char* argv[]) {
 	vPrint(vCross(test1, test2));
 	vPrint(vScale(-1, test1));
 }
+*/

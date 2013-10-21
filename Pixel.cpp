@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include "Pixel.h"
+#include <math.h>
 
 
 Pixel::Pixel() {
@@ -11,15 +12,15 @@ Pixel::Pixel() {
 }
 
 Pixel::Pixel(int x, int y, int z) {
-	r = x;
-	g = y;
-	b = z;
+	r = fmin(x, 255);
+	g = fmin(y, 255);
+	b = fmin(z, 255);
 }
 
 Pixel::Pixel(float x, float y, float z) {
-	r = (int)255*x;
-	g = (int)255*y;
-	b = (int)255*z;
+	r = fmin(255, round(255*x));
+	g = fmin(255, round(255*y));
+	b = fmin(255, round(255*z));
 
 }
 
@@ -31,9 +32,9 @@ std::string Pixel::toStr() {
 
 Pixel Pixel::copy() {
 	Pixel *p = new Pixel();
-	(*p).setR(r);
-	(*p).setG(g);
-	(*p).setB(b);
+	p->setR(r);
+	p->setG(g);
+	p->setB(b);
 	return *p;
 }
 
@@ -44,9 +45,9 @@ void Pixel::reset() {
 }
 
 void Pixel::add(Pixel p) {
-	(*this).setR(r+p.getR());
-	(*this).setG(g+p.getG());
-	(*this).setB(b+p.getB());
+	this->setR(r+p.getR());
+	this->setG(g+p.getG());
+	this->setB(b+p.getB());
 }
 
 int Pixel::getR() {
@@ -62,15 +63,15 @@ int Pixel::getB() {
 }
 
 void Pixel::setR(int red) {
-	r = std::min(red, 255);
+	r = fmin(red, 255);
 }
 
 void Pixel::setG(int green) {
-	g = std::min(green, 255);
+	g = fmin(green, 255);
 }
 
 void Pixel::setB(int blue) {
-	b = std::min(blue, 255);
+	b = fmin(blue, 255);
 }
 
 void Pixel::print() {
@@ -78,11 +79,15 @@ void Pixel::print() {
 }
 
 int main() {
-	Pixel::Pixel *p = new Pixel::Pixel(255, 255, 255);
-	Pixel::Pixel *black = new Pixel::Pixel(0,0,0);
-	(*p).print();
-	(*black).print();
-	(*black).add((*p));
-	(*black).print();
+	Pixel::Pixel p = *new Pixel::Pixel(255, 255, 255);
+	Pixel::Pixel black = *new Pixel::Pixel(0,0,0);
+	Pixel::Pixel pfloat = *new Pixel::Pixel(1.0f, 0.9f, 0.05f);
+	Pixel::Pixel pmax = *new Pixel::Pixel(2.0f, 1.0f, 0.5f);
+	p.print();
+	black.print();
+	black.add(p);
+	black.print();
+	pfloat.print();
+	pmax.print();
 
 }

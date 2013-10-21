@@ -11,6 +11,7 @@ class Light {
 			float getR();
 			float getG();
 			float getB();
+			void print();
         private:
 			float x;
 			float y;

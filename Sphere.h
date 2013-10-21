@@ -2,6 +2,7 @@
 #define SPHERE_H
 
 #include <vector>
+#include "Ray.h"
 
 class Sphere {
 	public:
@@ -11,11 +12,12 @@ class Sphere {
 		std::vector<float> getPos() const;
 		void setRadius(float r);
 		void setPos(std::vector<float>);
+		void resize(float);
 		Intersect::Intersect intersect(Ray);
 		std::vector<float> pointNormal(std::vector<float>);
 	private:
 		float radius;
 		std::vector<float> position;
-}
+};
 
 #endif

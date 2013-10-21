@@ -29,6 +29,9 @@ void loadScene(std::string file) {
   std::vector<Vertex::Vertex> vertices;
   std::vector<Triangle::Triangle> tris;
   
+  // store lights
+  std::vector<Light::Light> lights;
+  
 
   std::ifstream inpfile(file.c_str());
   if(!inpfile.is_open()) {

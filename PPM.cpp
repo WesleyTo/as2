@@ -5,6 +5,7 @@
 #include "Pixel.h"
 
 
+
 PPM::PPM(int h, int w, int m){
 	height = h;
 	width = w;
@@ -12,7 +13,7 @@ PPM::PPM(int h, int w, int m){
 	std::stringstream s;
 	s<<"P3\n"<<width<<" "<<height<<"\n"<<maxVal<<"\n";
 	header = s.str();			
-	pixels = new Pixel[height*width];
+	pixels = new Pixel::Pixel[height*width];
 	pixelCount = 0;
 }
 
@@ -53,7 +54,7 @@ void PPM::save(std::string name) {
 	newFile.close();
 }
 		
-		
+// Not Working
 int main() {
 	PPM* p = new PPM(640, 480, 255);
 	int val;
