@@ -13,7 +13,8 @@ class Vertex {
 		float getX() const;
 		float getY() const;
 		float getZ() const;		
-		std::vector<float> toVec();		
+		std::vector<float> toVec();	
+		void print() ;	
 	private:
 		float x;
 		float y;

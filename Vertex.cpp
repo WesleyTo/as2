@@ -1,5 +1,6 @@
 #include <vector>
 #include "Vertex.h"
+#include <iostream>
 
 	Vertex::Vertex(std::vector<float> v) {
 		x = v.at(0);
@@ -41,6 +42,22 @@
 		n[2] = z;
 		return n;
 	}
+	void Vertex::print() {
+		std::cout<<"vtx ["<< x << ", " << y << ", " << z << "]\n";
+	}
 
+//Working
+/*
+int main() {
+	Vertex::Vertex a = *new Vertex::Vertex(0,0,0);
+	Vertex::Vertex b = *new Vertex::Vertex(1,0,0);
+	Vertex::Vertex c = *new Vertex::Vertex(0,1,0);
+	a.print();
+	a = a.sub(b);
+	a.print();
+	std::vector<float> d = c.toVec();
+	std::cout<<"vec ["<< d[0] << ", " << d[1] << ", " << d[2] << "]\n";
+	Vertex::Vertex e = *new Vertex::Vertex(d);
+	e.print();	
 }
-
+*/
