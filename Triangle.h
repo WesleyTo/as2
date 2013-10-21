@@ -1,21 +1,21 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "Shape.h"
+#include "Ray.h"
 
 class Triangle {
 	public:
-		Triangle(Shape::vertex, Shape::vertex, Shape::vertex);
-		Shape::vertex getVertex(int) const;
+		Triangle(Vertex::Vertex, Vertex::Vertex, Vertex::Vertex);
+		Vertex::Vertex getVertex(int) const;
 		std::vector<float> getNormal() const;
-		Shape::boundingBox getBounds() const;
-
+		//boundingBox::boundingBox getBounds() const;
+		Intersect::Intersect intersect(Ray);
 	private:
-		Shape::vertex v1;
-		Shape::vertex v2;
-		Shape::vertex v3;
+		Vertex::Vertex v1;
+		Vertex::Vertex v2;
+		Vertex::Vertex v3;
 		std::vector<float> normal;
-		Shape::boundingBox bounds;
+		//boundingBox::boundingBox bounds;
 }
 
 #endif

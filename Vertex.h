@@ -8,7 +8,8 @@ class Vertex {
 		Vertex();
 		Vertex(std::vector<float>);
 		Vertex(float, float, float);
-		equals(Vertex);
+		bool equals(Vertex);
+		std::vector<float> sub(Vertex);
 		float getX() const;
 		float getY() const;
 		float getZ() const;				

@@ -25,5 +25,14 @@
 	float Vertex::getZ() const{
 		return z;
 	}
+	
+	std::vector<float> Vertex::sub(Vertex v) {
+		std::vector<float> a(3);
+		a[0] = x-v.getX();
+		a[1] = y-v.getY();
+		a[2] = z-v.getZ();
+		return a;
+	}
 
-} vertex;
+}
+

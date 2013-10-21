@@ -11,7 +11,7 @@ class Sphere {
 		std::vector<float> getPos() const;
 		void setRadius(float r);
 		void setPos(std::vector<float>);
-		Shape::intersect intersect(Ray);
+		Intersect::Intersect intersect(Ray);
 		std::vector<float> pointNormal(std::vector<float>);
 	private:
 		float radius;

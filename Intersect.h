@@ -3,14 +3,15 @@
 #include <vector>
 
 class Intersect{
-	private:
+	public:
+		Intersect();
 		void setHit(bool);
 		void setPoint(std::vector<float>);
 		bool isHit() const;
 		std::vector<float> getPoint() const;
-	public:
+	private:
 		bool hit;
 		std::vector<float> point;
-}
+};
 
 #endif

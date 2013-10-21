@@ -41,21 +41,14 @@ std::vector<float> pointNormal(std::vector<float> point) {
 	return vSub(point, p);
 }
 
-intersect Sphere::intersect(Ray r) {
-	Shape::intersect ret = new Shape::intersect();
+Intersect::Intersect Sphere::intersect(Ray r) {
+	Intersect::Intersect ret = new Intersect::Intersect();
 	std::vector<float>* d = &r.getDir();
 	std::vector<float>* e = &r.getEye();
 	float discriminant = sqrt(pow(vDot(*d, (vSub(*e, position))), 2) - vDot(*d, *d)*(vDot(vSub(*e, position)), vSub(*e, position)) - pow(radius, 2));
-	if (discriminant > 0) {
-		ret.hit = true;
-		ret.t1 = (vDot(vScale(-1, *d), vSub(*e,position))+discriminant)/vDot(*d, *d);
-		ret.t2 = (vDot(vScale(-1, *d), vSub(*e,position))-discriminant)/vDot(*d, *d);
-	}
-	else if (discriminant == 0) {
-		ret.hit = true;
-		ret.tangent = true;
-		ret.t1 = (vDot(vScale(-1, *d), vSub(e,position))+discriminant)/vDot(*d, *d);
-		ret.t2 = ret.t1;
-	}		
+	if (discriminant >= 0) {
+		ret.setHit(true);
+		ret.setPoint((vDot(vScale(-1, *d), vSub(*e,position))+discriminant)/vDot(*d, *d));
+	}	
 	return ret;
 }

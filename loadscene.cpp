@@ -26,7 +26,7 @@ void loadScene(std::string file) {
   // store values for shape objects
   // initialize in loop below
   std::vector<Sphere::Sphere> spheres;
-  std::vector<Shape::vertex> vertices;
+  std::vector<Vertex::Vertex> vertices;
   std::vector<Triangle::Triangle> tris;
   
 
@@ -305,7 +305,7 @@ void loadScene(std::string file) {
 	float horizSpace = (2.0 * planeHeight)/height;
 	
 	Ray::Ray ray = new Ray();
-	intersect itsct = new intersect();
+	Intersect::Intersect itsct = new Intersect::Intersect();
 	std::vector<float> intersection(3);
 	PPM::PPM output = new PPM(height, width);
 
