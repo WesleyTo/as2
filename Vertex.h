@@ -8,7 +8,10 @@ class Vertex {
 		Vertex();
 		Vertex(std::vector<float>);
 		Vertex(float, float, float);
-		operator==(const vertex*, const vertex*);
+		equals(Vertex);
+		float getX() const;
+		float getY() const;
+		float getZ() const;				
 	private:
 		float x;
 		float y;
