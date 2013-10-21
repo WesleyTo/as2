@@ -1,10 +1,6 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 #include <vector>
-#include "Ray.h"
-
-class Sphere;
-class Polygon;
 
 typedef struct
 {
@@ -30,9 +26,9 @@ typedef struct
 	float y;
 	float z;
 	vertex(std::vector<float> v) {
-		x = v[0];
-		y = v[1];
-		z = v[2];
+		x = v.at(0);
+		y = v.at(1);
+		z = v.at(2);
 	}
 	vertex(float a, float b, float c) {
 		x = a;
@@ -50,37 +46,4 @@ typedef struct
 	bool hit = false;
 	std::vector<float> point = NULL;
 } intersect;
-
-
-class Sphere {
-	public:
-		Sphere(float r, std::vector<float> p);
-		float getRadius();
-		std::vector<float> getPos();
-		void setRadius(float r);
-		void setPos(std::vector<float>);
-		intersect intersect(Ray);
-	private:
-		float radius;
-		std::vector<float> position;
-}
-
-class Polygon {
-	public:
-		Polygon(int size);
-		boundingBox getBounds();
-		void addVertex(vertex);
-		void replaceVertex(vertex, vertex);
-		int size();
-		void resize(int n);
-		void setBounds(vertex);
-		void resetBounds();
-		intersect intersect(Ray);
-	private:
-		int size;
-		boundingBox bounds;
-		vertex vertices[];
-		int vertexCount;
-}
-
 #endif	
