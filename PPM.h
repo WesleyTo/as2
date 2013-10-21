@@ -1,6 +1,9 @@
 #ifndef PPM_H
 #define PPM_H
+
 #include <sstream>
+#include <iostream>
+#include <fstream>
 #include "Pixel.h"
 
 class PPM {

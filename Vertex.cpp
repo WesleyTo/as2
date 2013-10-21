@@ -1,10 +1,5 @@
-#ifndef SHAPE_H
-#define SHAPE_H
-
 #include <vector>
-#include <iostream>
-
-
+#include "Vertex.h"
 
 typedef struct
 {
@@ -26,10 +21,3 @@ typedef struct
 	}
 
 } vertex;
-
-typedef struct 
-{
-	bool hit = false;
-	std::vector<float> point = NULL;
-} intersect;
-#endif	

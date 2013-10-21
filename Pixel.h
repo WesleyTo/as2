@@ -6,6 +6,7 @@ class Pixel {
 	public:
 		Pixel();
 		Pixel(int, int, int);
+		Pixel(float, float, float);
 		std::string toStr();
 		Pixel copy();
 		void reset();

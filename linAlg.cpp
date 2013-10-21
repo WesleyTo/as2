@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include "linAlg.h"
 
 
 float vDot(std::vector<float> a, std::vector<float> b) {

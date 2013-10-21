@@ -16,6 +16,13 @@ Pixel::Pixel(int x, int y, int z) {
 	b = z;
 }
 
+Pixel::Pixel(float x, float y, float z) {
+	r = (int)255*x;
+	g = (int)255*y;
+	b = (int)255*z;
+
+}
+
 std::string Pixel::toStr() {
 	std::stringstream s;
 	s<<r<<" "<<g<<" "<<b;

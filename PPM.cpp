@@ -64,5 +64,4 @@ int main() {
 		}	
 	}
 	(*p).save("output.ppm");
-
 }

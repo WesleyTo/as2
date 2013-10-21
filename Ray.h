@@ -2,9 +2,7 @@
 #define RAY_H
 
 #include <vector>
-
-class Ray;
-
+#include "linAlg.h"
 
 class Ray {
 	public:
@@ -13,15 +11,15 @@ class Ray {
 		void setEye(std::vector<float> e);
 		void setPoint(std::vector<float> p);
 		void initCamDir();
-		std::vector<float> getEye() const;
-		std::vector<float> getPoint() const;
+		std::vector<float> getEye() ;
+		std::vector<float> getPoint() ;
 		std::vector<float> project(float t);
-		std::vector<float> getDir() const;
+		std::vector<float> getDir();
 		
 	private:
 		std::vector<float> eye;
 		std::vector<float> point;
 		std::vector<float> camDir;
-}
+};
 
 #endif
