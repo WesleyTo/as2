@@ -6,6 +6,7 @@
 
 class Triangle {
 	public:
+		Triangle();
 		Triangle(Vertex::Vertex, Vertex::Vertex, Vertex::Vertex);
 		Vertex getVertex(int) const;
 		std::vector<float> getNormal() const;

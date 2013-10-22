@@ -43,7 +43,7 @@ void PPM::save(std::string name) {
 	std::ofstream newFile;
 	std::stringstream ss;
 	ss<<name<<".ppm";
-	newFile.open("test.ppm");
+	newFile.open(ss.str());
 	newFile<<header;
 	for (int h = 0; h < height; h++) {
 		for (int w = 0; w < width; w++) {

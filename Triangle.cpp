@@ -75,10 +75,10 @@ Intersect Triangle::intersect(Ray r) {
 
 
 int main() {
-	Vertex::Vertex a = *new Vertex::Vertex(0,0,0);
-	Vertex::Vertex b = *new Vertex::Vertex(1,0,0);
-	Vertex::Vertex c = *new Vertex::Vertex(0,1,0);
-	Triangle::Triangle t = *new Triangle::Triangle(a, b, c);
+	Vertex a = *new Vertex::Vertex(0,0,0);
+	Vertex b = *new Vertex::Vertex(1,0,0);
+	Vertex c = *new Vertex::Vertex(0,1,0);
+	Triangle t = *new Triangle::Triangle(a, b, c);
 	std::vector<float> p(3);
 	p[0] = 0;
 	p[1] = 0;
@@ -88,7 +88,8 @@ int main() {
 	e[1] = 0;
 	e[2] = 3;
 	Ray::Ray r = *new Ray::Ray(e, p);
-	if (t.intersect(r).isHit()) {
+	Intersect i = t.intersect(r);
+	if (i.isHit()) {
 		std::cout<<"OKAY\n";	
 	}
 	return 0;

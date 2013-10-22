@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Ray.h"
+#include "Intersect.h"
 
 class Sphere {
 	public:
