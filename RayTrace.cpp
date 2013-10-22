@@ -233,9 +233,7 @@ Pixel PPM::getPixel(int x, int y) {
 
 void PPM::save(std::string name) {
 	std::ofstream newFile;
-	std::stringstream ss;
-	ss<<name<<".ppm";
-	newFile.open("test.ppm");
+	newFile.open("output.ppm");
 	newFile<<header;
 	for (int h = 0; h < height; h++) {
 		for (int w = 0; w < width; w++) {
@@ -574,11 +572,11 @@ int main() {
 	vPrint(r.project(1.5));
 	
 	
-	PPM* ppm = new PPM(640, 480, 255);
+	PPM* ppm = new PPM(480, 640, 255);
 	int val;
-	for (int h = 0; h< 480; h++) {
-		for (int w =0; w<640; w++) {
-			val = std::min(255, (int)255*(w/ppm->getW()));
+	for (float h = 0; h<480; h++) {
+		for (float w =0; w<640; w++) {
+			val = fmin(255, (int)255*(w/640));
 			ppm->addPixel(*(new Pixel::Pixel(val, val, val)));
 		}	
 	}
