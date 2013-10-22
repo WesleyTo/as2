@@ -254,9 +254,7 @@ Ray::Ray() {}
 Ray::Ray(std::vector<float> e, std::vector<float> p) {
 	eye = e;
 	point = p;
-	camDir[0] = p[0] - e[0];
-	camDir[1] = p[1] - e[1];
-	camDir[2] = p[2] - e[2];
+	camDir = vSub(p, e);
 }
 
 void Ray::setEye(std::vector<float> e){
@@ -541,9 +539,9 @@ int main() {
 	std::cout<<"vec ["<< d[0] << ", " << d[1] << ", " << d[2] << "]\n";
 	Vertex::Vertex e1 = *new Vertex::Vertex(d);
 	e1.print();	
-	Vertex a1 = *new Vertex::Vertex(0,0,0);
-	Vertex b1 = *new Vertex::Vertex(1,0,0);
-	Vertex c1 = *new Vertex::Vertex(0,1,0);
+	Vertex a1 = *new Vertex::Vertex(0,1,0);
+	Vertex b1 = *new Vertex::Vertex(1,-1,0);
+	Vertex c1 = *new Vertex::Vertex(-1,-1,0);
 	Triangle t = *new Triangle::Triangle(a1,b1,c1);
 	p[0] = 0;
 	p[1] = 0;
@@ -552,20 +550,17 @@ int main() {
 	e[0] = 0;
 	e[1] = 0;
 	e[2] = 3;
-	///
-	/// Segmentation Fault: 11
-	///
-	/*
+
 	Ray::Ray r = *new Ray::Ray(e, p);
-	std::cout<<"made it\n";
 	i = t.intersect(r);
 	if (i.isHit()) {
-		std::cout<<"OKAY\n";	
+		std::cout<<"Triangle Intersected - OKAY\n";	
 	}
 	Sphere::Sphere s = *new Sphere::Sphere(1, p);
 	if (s.intersect(r).isHit()) {
-		std::cout<<"OKAY\n";	
+		std::cout<<"Sphere Intersected - OKAY\n";	
 	}
+
 	
 	e[0] = 0;
 	e[1] = -4;
@@ -575,8 +570,9 @@ int main() {
 	p[2] = -1;
 	r.setEye(e);
 	r.setPoint(p);
-	r.project(1.5);
-	*/
+	std::cout<<"projected ";
+	vPrint(r.project(1.5));
+	
 	
 	PPM* ppm = new PPM(640, 480, 255);
 	int val;
