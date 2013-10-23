@@ -9,10 +9,17 @@
 
 Shaders::Shaders() {
   numLights = 0;
+  numSpheres = 0;
+  numTriangles = 0;
   std::vector<Light> l(10);
   lightSize = 10;
+  triangleSize = 10;
+  sphereSize = 10;
   lights = l;
-  //also need list of Polygons
+  std::vector<Triangle> t(10);
+  std::vector<Sphere> s(10);
+  triangles = t;
+  spheres = s;
 }
 
 void Shaders::addLight(Light l){
@@ -23,12 +30,28 @@ void Shaders::addLight(Light l){
     lightSize = lightSize * 2;
   }
 }
+void Shaders::addSphere(sphere s){
+  spheres[numSpheres] = s;
+  numSpheres = numSpheres + 1;
+  if(numSpheres == sphereSize - 1){
+    spheres.resize(sphereSize * 2);
+    sphereSize = sphereSize * 2;
+  }
+}
+void Shaders::addTriangle(Triangle t){
+  triangles[numTriangles] = t;
+  numTriangles = numTriangles + 1;
+  if(numTriangles == triangleSize - 1){
+    triangles.resize(triangleSize * 2);
+    triangleSize = triangleSize * 2;
+  }
+}
 
-Pixel Shaders::pixelLight(int x, int y){
+Pixel Shaders::pixelLight(float x, float y, float z){
   std::vector<float> color(3);
   for (int i = 0; i < numLights; i++){
     std::Light l = lights[i];
-    if(this.hasShadow(x, y, l) == 0){ //if light isn't blocked by another object
+
 
       if(l.getType() == 0) { //directional Light
 	std::vector<float> lightDir(3);
@@ -42,13 +65,14 @@ Pixel Shaders::pixelLight(int x, int y){
 	
 	std::float<vector> amb = this.ambient(lightColor);
 	color = vAdd(color, amb);
+	if(this.hasShadow(x, y, z, l) == 0){ //if light isn't blocked by another object
+	  std::vector<float> diff = this.diffuse(surfaceDir, center, scale(-1,lightDir), lightColor);
+	  color = vAdd(color, diff);
 	
-	std::vector<float> diff = this.diffuse(surfaceDir, center, scale(-1,lightDir), lightColor);
-	color = vAdd(color, diff);
 	
-	
-	std::vector<float> spec = this.specular(surfaceDir, center, viewer, lightDir, lightColor);
-	color = vAdd(color, spec);
+	  std::vector<float> spec = this.specular(surfaceDir, center, viewer, lightDir, lightColor);
+	  color = vAdd(color, spec);
+	}
       }
       else { //point light
 	std::vector<float> lightPos(3);
@@ -64,14 +88,16 @@ Pixel Shaders::pixelLight(int x, int y){
 	std::vector<float> a = ambient(lightColor);
 	color = vAdd(color, a);
 	
-	std::vector<float> diff = diffuse(surfaceDir, center, lightDir, lightColor);
-	color = vAdd(color, diff);
+	if(this.hasShadow(x, y, l) == 0){ //if light isn't blocked by another object
+	  std::vector<float> diff = diffuse(surfaceDir, center, lightDir, lightColor);
+	  color = vAdd(color, diff);
         
-	std::vector<float> spec = specular(surfaceDir, center, viewer, scale(-1,lightDir), lightColor);
-	color = vAdd(color, spec);		      
+	  std::vector<float> spec = specular(surfaceDir, center, viewer, scale(-1,lightDir), lightColor);
+	  color = vAdd(color, spec);
+	}		      
       }
-    }
   }
+}
   Pixel pixelColor = new Pixel(color[0], color[1], color[2]);
   return pixelColor;
 }
@@ -118,12 +144,31 @@ std::vector<float> Shaders::specular(std::vector<float> surfaceDir, std::vector<
   return m;
 }
 
-int Shaders::hasShadow(int x, int y, Light l){
-  return 1;//1 means blocked, 0 means not blocked
-  /*
-We need to cycle through the polygons and check if the ray between x and y and
-the light intersects one of the polygons. if so return 1 if not return 0
-   */
+int Shaders::hasShadow(float x, float y, float z, Light l){//returns 1 is surface is blocked by another polygon, 0 if not
+  vector<float> lightVector(3);
+  lightVector[0] = l.getX;
+  lightVector[1] = l.getY;
+  lightVector[2] = l.getZ;
+  vector<float> surfaceVector(3);
+  surfaceVector[0] = x;
+  surfaceVector[1] = y;
+  surfaceVector[2] = z;
+  Ray ray = new Ray(surfaceVector, lightVector);
+  for(int s = 0; s < numSpheres; s++){
+    Sphere sphere = spheres[s];
+    Intersect hit = sphere.intersect(ray);
+    if(hit.isHit() == true){
+      return 1;
+    }
+  }
+  for(int t = 0; t < numTriangles; t++){
+    Triangle triangle = triangles[t];
+    Intersect hit = triangle.intersect(ray);
+    if(hit.isHit() == true){
+      return 1;
+    }
+  }
+  return 0;
 }
 
 

@@ -335,8 +335,18 @@ void loadScene(std::string file) {
 				// assume spheres is an array of Sphere objects
 				itsct = spheres.at(sphereIt).intersect(ray);
 				if (itsct.hit) {
-					intersection = ray.project(itsct.point);				
-					//shade and store values in image output
+				  intersection = ray.project(itsct.point);
+				  /*
+				  vector<float> cameraVector = ray.getDir();//get the vector
+                                  vector<float> surfaceNormal = HELP! calculate surface Normal of shape
+                            
+				  float scale = 2 * vDot(cameraVector, surfaceNormal)
+                                  vector<float> n = scale(scale, surfaceNormal)
+				  vector<float> reflect = cameraVector - n;
+
+                                  vector<float> reflectedLocation
+				  */
+													  //shade and store values in image output
 					// for every light
 						// calculate shading for object point
 						// add values to pixel vector
@@ -356,4 +366,3 @@ void loadScene(std::string file) {
 	output.save(file);
 	
 }
-

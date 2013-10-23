@@ -3,8 +3,9 @@
 
 class Light {
         public:
-			Light(float, float, float, float, float, float);
+			Light(int, float, float, float, float, float, float);
 			//std::string toStr();
+			int getType();			
 			float getX();
 			float getY();
 			float getZ();
@@ -13,7 +14,7 @@ class Light {
 			float getB();
 			void print();
         private:
-			float x;
+	  int type;		float x;
 			float y;
 			float z;
 			float r;

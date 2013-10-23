@@ -2,19 +2,30 @@
 #define SHADERS_H
 #include "Light.h"
 #include "Pixel.h"
+#include "Intersect.h"
+#include "Sphere.h"
+#include "Triangle.h"
 
 class Shaders {
 
     public:
 		Shaders();
 		void addLight(Light);
-		Pixel pixelLight(int, int);
-		Pixel ambient(std::vector<float>);
-		Pixel diffuse(std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>);
-		Pixel specular(std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>);
-		int hasShadow(int, int, Light);
+		void addSphere(Sphere);
+		void addTriangle(Triangle);
+		Pixel pixelLight(float, float, float);
+	    std::vector<float> ambient(std::vector<float>);
+	    std::vector<float> diffuse(std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>);
+		std::vector<float> specular(std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>, std::vector<float>);
+		int hasShadow(float, float, float,  Light);
     private:
-		vector<Light> lights;
+		std::vector<Light> lights;
+		std::vector<Sphere> spheres;
+		std::vector<Triangle> triangles;
+		int numTriangles;
+		int triangleSize;
+		int numSpheres;
+		int sphereSize;
 		int lightSize;
 		int numLights;
 };
